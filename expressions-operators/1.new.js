@@ -2,7 +2,7 @@
 // usada para criar novo objeto
 
 let nome = new String('Myke');
-let age = new Number(123);
+let age = new Number(123); 
 nome.surName = 'Brito';
 
 console.log(nome, age);
