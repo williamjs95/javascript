@@ -16,10 +16,12 @@
     --tt-input: #212529;
     --ot-input: #02799d;
     --bd-input: rgba(73, 80, 87, 0.3);
-    -tt-placeholder: rgba(73, 80, 87, 0.5);
+    --bg-input: #dce2e9;
+    --tt-placeholder: rgba(73, 80, 87, 0.5);
 
     --tt-button: white;
     --bg-button: #02799d;
+    --bg-button-hover: #025f7b;
 
     --bg-error: #f03e3e;
     --tt-error: white;
@@ -28,7 +30,35 @@
 body{
     background-color: #040924;
     font-family: 'Roboto', sans-serif;
+}
+
+/* alert error */
+.alert-error{
+    position: absolute;
+    background-color: var(--bg-error);
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--tt-error);
+    padding: .8rem 0;
+    font-weight: bold;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-30px);
+    transition: transform .5s;
+}
+
+.alert-error.open{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+body, input, button{
     font-size: 1.6rem;
+    line-height: 2rem;
 }
 
 .container{
@@ -46,3 +76,125 @@ body{
     box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1);
     border-radius: .6rem;
 }
+
+.title{
+    font-size: 3.2rem;
+    line-height: 4rem;
+    color: var(--tt-heading);
+}
+
+form{
+    width: 30rem;
+}
+
+form h1{
+    margin-bottom: 3.2rem;
+}
+
+form input{
+    width: 100%;
+    border: 1px solid var(--bd-input);
+    background-color: var(--bg-input);
+    padding: 1.6rem;
+    border-radius: .4rem;
+}
+
+form input:focus{
+    outline: 2px solid var(--ot-input);
+}
+
+form input::placeholder{
+    color: var(--tt-placeholder);
+}
+
+form label{
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    color: var(--tt-label);
+
+    display: block;
+    margin-bottom: .8rem;
+}
+
+.input-wrapper + .input-wrapper{
+    margin-top: 1.6rem;
+}
+
+button{
+    margin-top: 3.2rem;
+    padding: 1.6rem;
+    width: 100%;
+
+    border-radius: .4rem;
+    border: none;
+    background-color: var(--bg-button);
+    color: var(--tt-button);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background .3s;
+}
+
+button:hover{
+    background-color: var(--bg-button-hover);
+}
+
+#right-arrow{
+    max-width: 1.6rem;
+    max-height: 1.6rem;
+}
+
+#closeButton{
+    max-width: 2.7rem;
+    max-height: 2.7rem;
+}
+
+/* modal */
+
+.modal-wrapper{
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    display: grid;
+    place-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-wrapper.open{
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal{
+    position: relative;
+}
+
+.modal button{
+    background: none;
+    border: none;
+
+    position: absolute;
+    top: -4rem;
+    right: -16rem;
+
+    cursor: pointer;
+
+    transition: transform .3s;
+}
+
+.modal button:hover{
+    transform: scale(1.1);
+}
+
+
