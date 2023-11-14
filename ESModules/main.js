@@ -1,0 +1,1 @@
+import './utils'; // nessa linha, ele importa e já executa
