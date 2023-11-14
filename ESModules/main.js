@@ -1,1 +1,3 @@
-import './utils'; // nessa linha, ele importa e já executa
+import funcaoPadrao, {date, greeting} from './utils.js';
+
+funcaoPadrao('mayk'); 

@@ -1,3 +1,8 @@
-const message = "mensagem"; // essa variável fica isolada neste arquivo, e não consigo usar ela em outro lugar
+const date = new Date();
+const greeting = name => `hello ${name}`;
 
-alert(message);
+export default function (argument) {
+    console.log(date, greeting(argument));
+};
+
+export {date, greeting};
