@@ -1,5 +1,5 @@
-import resetControls from './controls.js';
-import { Timer } from './timer.js';
+import Controls from './controls.js';
+import Timer from './timer.js';
 
 const buttonPlay = document.querySelector('.play');
 const buttonPause = document.querySelector('.pause');
@@ -9,34 +9,35 @@ const buttonSoundOn = document.querySelector('.sound-on');
 const buttonSoundOff = document.querySelector('.sound-off');
 const minutesDisplay = document.querySelector('.minutes');
 const secondsDisplay = document.querySelector('.seconds');
-let minutes = Number(minutesDisplay.textContent);
-let timerTimeOut;
+
+const controls = Controls({
+    buttonPause,
+    buttonPlay,
+    buttonSet,
+    buttonStop,
+    getMinutes,
+});
 
 const timer = Timer({
     minutesDisplay,
     secondsDisplay,
-    timerTimeOut,
-    resetControls,
+    resetControls: controls.reset,
+    minutes,
 });
 
 buttonPlay.addEventListener('click', function() {
-    buttonPlay.classList.add('hide');
-    buttonPause.classList.remove('hide');
-    buttonSet.classList.add('hide');
-    buttonStop.classList.remove('hide');
-
+    controls.play();
     timer.countdown();
 })
 
 buttonPause.addEventListener('click', function() {
-    buttonPause.classList.add('hide');
-    buttonPlay.classList.remove('hide');
-    clearTimeout(timerTimeOut);
+    controls.pause();
+    timer.hold();
 })
 
 buttonStop.addEventListener('click', function() {
-    resetControls();
-    timer.resetTimer();
+    controls.reset();
+    timer.reset();
 })
 
 buttonSoundOff.addEventListener('click', function() {
@@ -50,12 +51,13 @@ buttonSoundOn.addEventListener('click', function() {
 })
 
 buttonSet.addEventListener('click', function() {
-    let newMinutes = prompt('Quantos minutos?');
-    if(!newMinutes) {
-        timer.resetTimer();
+    let newMinutes = controls.getMinutes();
+    
+    if (!newMinutes) {
+        timer.reset();
         return;
     }
 
-    minutes = newMinutes;
-    updateTimerDisplay(minutes, 0);
+    timer.updateDisplay(newMinutes, 0);
+    timer.updateMinutes(newMinutes);
 })
